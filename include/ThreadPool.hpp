@@ -30,6 +30,11 @@ namespace MySpace
 
         ~ThreadPool()
         {
+            ShutDown();
+        }
+
+        inline void ShutDown()
+        {
             m_running = false;
             m_task_cv.notify_all();
             for(std::thread& thread : m_pool)
@@ -40,6 +45,7 @@ namespace MySpace
                 }
             }
         }
+
         template<class F, class ...Args>
         auto CommitTask(F&& f, Args&&... args) ->std::future<decltype(f(args...))>
         {

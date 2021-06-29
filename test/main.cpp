@@ -10,8 +10,17 @@ void Func()
 int main()
 {
     MySpace::ThreadPool pool(2);
-    auto func_future = pool.CommitTask(Func);
-    func_future.get();
+    pool.ShutDown();
+    try
+    {
+        auto func_future = pool.CommitTask(Func);
+        func_future.get();
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }   
+    
     std::system("pause");
     return 0;
 }
