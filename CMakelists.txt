@@ -1,0 +1,26 @@
+﻿cmake_minimum_required(VERSION 3.8)
+
+#C++程序
+project(ThreadPool)
+
+#使用C++11标准
+set(CMAKE_CXX_STANDARD 17)
+
+add_definitions(
+        -DMBCS                          # 多字节字符集
+        -D_WIN32_WINNT=0x0600           # 
+        -DWIN32_LEAN_AND_MEAN           # 
+        -D_CRT_SECURE_NO_WARNINGS       # 
+        -D_HAS_STD_BYTE=0               #  
+        /Zi                             # /Zi 用来生成程序数据库格式的调试信息
+)
+
+set(CMAKE_MFC_FLAG 1)                   # It should be set to 1 for the static MFC library, and 2 for the shared MFC library.
+set(CMAKE_CXX_FLAGS_RELEASE "/MT /O2")
+set(CMAKE_CXX_FLAGS_DEBUG "/MTd /Od")
+
+include_directories(
+        ./include
+)
+
+add_subdirectory(Test)
